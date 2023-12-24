@@ -1,0 +1,48 @@
+maillog_file = /var/log/mail.log
+
+# core options
+myhostname = mail.arf20.com
+myorigin = /etc/mailname
+mydestination = mail.arf20.com, arf20.com, localhost, localhost.localdomain
+#relayhost = # do relay (auth)
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+mailbox_size_limit = 0
+recipient_delimiter = +
+inet_interfaces = all
+
+alias_maps = hash:/etc/aliases
+alias_database = hash:/etc/aliases
+
+# common smtpd (incoming) options
+#   tls options
+smtpd_tls_cert_file=/etc/letsencrypt/live/mail.arf20.com/fullchain.pem
+smtpd_tls_key_file=/etc/letsencrypt/live/mail.arf20.com/privkey.pem
+smtpd_use_tls=yes
+smtpd_tls_security_level=may
+smtpd_tls_protocols = !SSLv2, !SSLv3
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtpd_relay_before_recipient_restrictions=no
+#   restriction options
+#     no client restrictions, allow all hosts to connect (for incoming mail)
+#     allow incoming messages from unauthenticated servers
+smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
+#     allow relaying mail only from ARFNET users
+smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
+#     only allow messages to be sent from arf20.com domain
+smtpd_sender_restrictions = reject_unknown_sender_domain
+#   auth options
+smtpd_sasl_auth_enable=yes
+smtpd_sasl_type=dovecot
+smtpd_sasl_path=private/auth
+
+# common smtp (outgoing) options
+#   tls options
+smtp_tls_cert_file=/etc/letsencrypt/live/mail.arf20.com/fullchain.pem
+smtp_tls_key_file=/etc/letsencrypt/live/mail.arf20.com/privkey.pem
+smtp_use_tls = yes
+smtp_tls_security_level=may
+smtp_tls_protocols = !SSLv2, !SSLv3
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+
+local_recipient_maps = proxy:unix:passwd.byname $alias_maps
+
