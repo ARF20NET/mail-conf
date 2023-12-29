@@ -25,11 +25,14 @@ smtpd_relay_before_recipient_restrictions=no
 #   restriction options
 #     no client restrictions, allow all hosts to connect (for incoming mail)
 #     allow incoming messages from unauthenticated servers
-smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
+smtpd_recipient_restrictions = check_recipient_access hash:/etc/postfix/protected_destinations, permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
 #     allow relaying mail only from ARFNET users
 smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
 #     only allow messages to be sent from arf20.com domain
 smtpd_sender_restrictions = reject_unknown_sender_domain
+#   restrict mailing lists to insiders
+smtpd_restriction_classes = insiders_only
+insiders_only = check_sender_access hash:/etc/postfix/insiders, reject
 #   auth options
 smtpd_sasl_auth_enable=yes
 smtpd_sasl_type=dovecot

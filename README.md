@@ -19,14 +19,16 @@ No POP3 because POP3 sucks
 ## Files
 ```
 postfix     
-|- master.cf        daemon instance specific, { smtpd, submission, submissions }
-|- main.cf          program specific, { smtp, smtpd }
-|- aliases          address aliases
+|- master.cf              daemon instance specific, { smtpd, submission, submissions }
+|- main.cf                program specific, { smtp, smtpd }
+|- aliases                address aliases
+|- protected_destinations destionations only reachable by insiders
+|- insiders               insider addresses
 dovecot
-|- dovecot.conf     dovecot config
+|- dovecot.conf           dovecot config
 gnu-mailutils
-|- mailutils.conf   GNU mailutils config
-|- .mailrc          user specific mail options
+|- mailutils.conf         GNU mailutils config
+|- .mailrc                user specific mail options
 ```
 
 ## Tested clients

@@ -10,3 +10,6 @@ ftp: postmaster
 abuse: postmaster
 
 postmaster: arf20
+
+announce: REDACTED
+
