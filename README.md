@@ -25,6 +25,8 @@ postfix
 |- protected_destinations destionations only reachable by insiders
 |- insiders               insider addresses
 |- update_aliases.sh      script to compile aliases, insiders and protected_destinations, load them and reload postfix
+opendkim
+|- opendkim.conf          opendkim config
 dovecot
 |- dovecot.conf           dovecot config
 gnu-mailutils
