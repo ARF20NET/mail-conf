@@ -1,0 +1,18 @@
+name: Mirror to ARFNET
+
+on: [push]
+
+env:
+  REMOTE_REPO: mail-conf
+  REMOTE_SERVER: git.arf20.com
+
+jobs:
+  push-mirror:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Clone repo
+      run: git clone https://github.com/${{ github.repository }}
+      
+    - name: Push to remote repo
+      run: cd $REMOTE_REPO && git push -u https://${{ secrets.MIRROR_USER }}:${{ secrets.MIRROR_PASSWORD }}@$REMOTE_SERVER/$REMOTE_REPO master
+
