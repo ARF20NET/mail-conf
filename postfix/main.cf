@@ -59,3 +59,6 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
 local_recipient_maps = proxy:unix:passwd.byname $alias_maps
 
+# for mlmmj
+recipient_delimiter = +
+

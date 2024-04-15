@@ -8,8 +8,21 @@ webmaster: postmaster
 www: postmaster
 ftp: postmaster
 abuse: postmaster
+report: postmaster
+admin: postmaster
+tech: postmaster
+contact: postmaster
+dmca: postmaster
+majordomo-owner: postmaster
+owner-majordomo: postmaster
+complaints: postmaster
 
 postmaster: arf20
 
-announce: REDACTED
+#announce: arf20, aruizfernandez05@gmail.com, raulgilabert@proton.me, cisbetterthanpython@gmail.com, papeltous@gmail.com, yero@yero.dev, eloy@yero.dev, fardin@tekhmos.com, moigo48@protonmail.com
+
+# mlmmj lists
+mlmmj-test:  "|/usr/bin/mlmmj-receive -L /var/spool/mlmmj/mlmmj-test/"
+announce:  "|/usr/bin/mlmmj-receive -L /var/spool/mlmmj/announce/"
+discussion:  "|/usr/bin/mlmmj-receive -L /var/spool/mlmmj/discussion/"
 
